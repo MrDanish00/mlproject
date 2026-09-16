@@ -1,0 +1,207 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Performance Prediction</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+        }
+
+        .container {
+            width: 500px;
+            max-width: 90%;
+            margin: 50px auto;
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #333;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 6px;
+            font-weight: bold;
+            color: #444;
+        }
+
+        select,
+        input[type="number"] {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 15px;
+        }
+
+        button {
+            width: 100%;
+            margin-top: 25px;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            background: #007bff;
+            color: white;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #0056b3;
+        }
+
+        .result {
+            margin-top: 25px;
+            padding: 15px;
+            text-align: center;
+            background: #e8f5e9;
+            border-radius: 5px;
+            color: #2e7d32;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>Student Performance Prediction</h1>
+
+    <form action="{{ url_for('predict_datapoint') }}" method="POST">
+
+        <!-- Gender -->
+        <label for="gender">Gender</label>
+        <select name="gender" id="gender" required>
+            <option value="" disabled selected>Select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+        </select>
+
+        <!-- Race / Ethnicity -->
+        <label for="race/ethnicity">Race / Ethnicity</label>
+        <select name="race/ethnicity" id="race/ethnicity" required>
+            <option value="" disabled selected>Select Race / Ethnicity</option>
+            <option value="group A">Group A</option>
+            <option value="group B">Group B</option>
+            <option value="group C">Group C</option>
+            <option value="group D">Group D</option>
+            <option value="group E">Group E</option>
+        </select>
+
+        <!-- Parental Level of Education -->
+        <label for="parental level of education">
+            Parental Level of Education
+        </label>
+
+        <select
+            name="parental level of education"
+            id="parental level of education"
+            required
+        >
+            <option value="" disabled selected>
+                Select Education Level
+            </option>
+
+            <option value="some high school">
+                Some High School
+            </option>
+
+            <option value="high school">
+                High School
+            </option>
+
+            <option value="some college">
+                Some College
+            </option>
+
+            <option value="associate's degree">
+                Associate's Degree
+            </option>
+
+            <option value="bachelor's degree">
+                Bachelor's Degree
+            </option>
+
+            <option value="master's degree">
+                Master's Degree
+            </option>
+        </select>
+
+        <!-- Lunch -->
+        <label for="lunch">Lunch</label>
+        <select name="lunch" id="lunch" required>
+            <option value="" disabled selected>Select Lunch Type</option>
+            <option value="standard">Standard</option>
+            <option value="free/reduced">Free/Reduced</option>
+        </select>
+    
+        <!-- Test Preparation Course -->
+        <label for="test preparation course">Test Preparation Course</label>
+
+        <select name="test preparation course" id="test preparation course" required>
+            <option value="" disabled selected>Select Test Preparation Course</option>
+            <option value="none">None</option>
+            <option value="completed">Completed</option>
+        </select>
+        
+
+        <!-- Reading Score -->
+        <label for="reading score">Reading Score</label>
+        <input
+            type="number"
+            name="reading score"
+            id="reading score"
+            min="0"
+            max="100"
+            placeholder="Enter reading score"
+            required
+        >
+
+        <!-- Writing Score -->
+        <label for="writing score">Writing Score</label>
+        <input
+            type="number"
+            name="writing score"
+            id="writing score"
+            min="0"
+            max="100"
+            placeholder="Enter writing score"
+            required
+        >
+
+        <button type="submit">
+            Predict Performance
+        </button>
+
+    </form>
+
+    {% if results %}
+        <div class="result">
+            Predicted Math Score: {{ results }}
+        </div>
+    {% endif %}
+
+</div>
+
+</body>
+</html>
+```
